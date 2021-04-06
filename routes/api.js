@@ -45,22 +45,8 @@ router.put('/api/workouts/:id', (req, res) => {
 });
 
 router.get('/api/workouts/range', (req, res) => {
-    Workout.aggregate([{
-        $addFields: { totalDuration: { $sum: "$exercises.duration" } }
-    }])
-        .sort({ day: -1 })
+    Workout.aggregate([{ $addFields: { totalDuration: { $sum: "$exercises.duration" } } }])
         .then(dbWorkout => {
-            function compare(a, b) {
-                let comp
-                if (a.day > b.day) {
-                    comp = 1;
-                } else if (a.day < b.day) {
-                    comp = -1;
-                }
-                return comp;
-            }
-            dbWorkout.length = 7;
-            dbWorkout.sort(compare)
             res.json(dbWorkout);
         })
         .catch(err => {
