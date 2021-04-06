@@ -14,16 +14,14 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutTracker", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
     useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
+    useFindAndModify: false
 });
 
-app.use(require('./routes/api'));
-app.use(require('./routes/home-routes'));
+app.use(require('./routes/api.js'));
+app.use(require('./routes/home-routes.js'));
 
 app.listen(PORT, () => {
-    console.log(`App running on  http://localhost:${PORT}`);
+    console.log(`App running on http://localhost:${PORT}`);
 });
