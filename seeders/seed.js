@@ -1,7 +1,7 @@
 let mongoose = require("mongoose");
 let db = require("../models");
 
-mongoose.connect("mongodb://localhost/workout", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
@@ -62,7 +62,7 @@ let workoutSeed = [
     exercises: [
       {
         type: "resistance",
-        name: "Bench Press",
+        name: "Dead Lift",
         duration: 20,
         weight: 285,
         reps: 10,
@@ -75,7 +75,7 @@ let workoutSeed = [
     exercises: [
       {
         type: "resistance",
-        name: "Bench Press",
+        name: "Inclined Press",
         duration: 20,
         weight: 300,
         reps: 10,
@@ -101,7 +101,7 @@ let workoutSeed = [
     exercises: [
       {
         type: "resistance",
-        name: "Bench Press",
+        name: "Leg Press",
         duration: 20,
         weight: 300,
         reps: 10,
